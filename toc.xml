@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Addon Author="Jeuith" APIVersion="14" Name="Jita" Description="Jita Chat Client"> 
+	<Script Name="Core.lua"/> 
+
+	<Script Name="Models/Player.lua"/>
+	<Script Name="Models/Stream.lua"/>
+	<Script Name="Models/Member.lua"/>
+	<Script Name="Models/Profile.lua"/>
+	<Script Name="Models/Message.lua"/>
+
+	<Script Name="Client/Client.lua"/>
+	<Script Name="Client/Streams.lua"/>
+	<Script Name="Client/Profiles.lua"/>
+	<Script Name="Client/JitaCommands.lua"/>
+	<Script Name="Client/JitaMacros.lua"/>
+	<Script Name="Client/ChatEvents.lua"/>
+	<Script Name="Client/WorldEvents.lua"/>
+	<Script Name="Client/WhoEvents.lua"/>
+	<Script Name="Client/GuildEvents.lua"/>
+	<Script Name="Client/UIBindings.lua"/>
+	<Script Name="Client/Notifications.lua"/>
+	<Script Name="Client/Greetings.lua"/>
+	<Script Name="Client/Sounds.lua"/>
+
+	<Script Name="ICComm/Node.lua"/>
+
+	<Script Name="UI/Themes.lua"/>
+	<Script Name="UI/WindowManager.lua"/> 
+
+	<Script Name="UI/Windows/OverlayWindow.lua"/> 
+	<Script Name="UI/Windows/ChatWindow.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/HeaderControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/TabsControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/RosterControl.lua"/> 
+	<Script Name="UI/Windows/ChatWindowControls/SidebarControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/MessagesControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/InputControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/SuggestedMenuControl.lua"/>
+	<Script Name="UI/Windows/ChatWindowControls/ContextMenuControl.lua"/>
+	<Script Name="UI/Windows/ProfileWindow.lua"/>
+	<Script Name="UI/Windows/ProfileWindowControls/TabsControl.lua"/>
+	<Script Name="UI/Windows/ProfileWindowControls/InfoControl.lua"/>
+	<Script Name="UI/Windows/ProfileWindowControls/ModelControl.lua"/>
+	<Script Name="UI/Windows/ProfileWindowControls/BioControl.lua"/>
+	<Script Name="UI/Windows/ModelPreviewWindow.lua"/>
+	<Script Name="UI/Windows/NotificationWindow.lua"/>
+	<Script Name="UI/Windows/ChannelsManagerWindow.lua"/>
+	<Script Name="UI/Windows/TranscriptWindow.lua"/>
+	<Script Name="UI/Windows/ConfigWindow.lua"/>
+	<Script Name="UI/Windows/DebugWindow.lua"/>
+	<Script Name="UI/Windows/HelpWindow.lua"/>
+
+	<Form Name="Views/Forms.xml"/>
+
+	<Script Name="Utils/Utils.lua"/>
+	<Script Name="Utils/Consts.lua"/>
+	<Script Name="Utils/LibJSON.lua"/>
+	<Script Name="Utils/LibCRC32.lua"/>
+	<Script Name="Utils/Gemini/GeminiColor.lua"/>
+</Addon>

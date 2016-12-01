@@ -1,0 +1,18 @@
+* Stability:
+- can consume too much memory for my liking. need to trim few things out.
+- time per cycle seems fine on the long run as the add-on is on idle mode most time, however spikes may randomly occur at times, especially that one at login is still annoying.
+
+
+
+* Issues:
+- overlay does not invoke mainchat window properly.
+
+
+
+* Features:
+-
+
+
+
+* Sorted:
+-

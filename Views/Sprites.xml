@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sprites>
+    <Sprite Name="Jita_ChatWindow_Background" Cycle="1">
+        <Frame Texture="Jita\background.png" x5="1280" y5="720" Stretchy="1" x0="0" x1="0" x2="0" x3="0" x4="0" y0="0" y1="0" y2="0" y3="0" y4="0" HotspotX="0" HotspotY="0" Duration="1.000" StartColor="white" EndColor="white"/>
+    </Sprite>
+</Sprites>

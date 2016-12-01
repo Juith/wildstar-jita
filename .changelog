@@ -1,0 +1,272 @@
+* 0.6.0
+
+	- 
+
+* 0.5.9
+
+	- Streamline Forge UI windows color scheme.
+	- Chat windows scrollbars now will auto hide when windows are not in focus or at bottom.
+	- Implements new Jita commands to customize chat winows on the fly.
+	- Segregated streams allocated backlog memory reduced to 192 from 272.
+	- Fixes an issue where messages may not show chat channel name when invoked of overlay.
+
+* 0.5.8
+
+	- Deprecates opacity active/inactive. Both are now streamlined into one value.
+	- Body background color of Viking Theme now is completely opaque at 100 opacity.
+	- Chat input will no longer attempt to claim focus when clicking chat windows by default.
+	- Fixes an issue where backlog may exceed max lines.
+	- Fixes an issue where residence name may not be correct.
+
+* 0.5.7
+
+	- User can now write his private notes on others players profiles.
+	- Add-on internal data are now stored realm wide.
+	- Player name mentions now only counts when first and last names has least 3 characters.
+	- Fixes an issue where randomly generated numbers were given the same seed.
+	- Fixes an issue where duplicate keywords may fail to iterate.
+
+* 0.5.6
+
+	- Detection of nearby units in 20m range is now disabled while player unit is in combat or dead.
+	- Reduces rates at which extra packets were sent by ICNode keep-alive.
+	- Minor tweaks to UI. Body background color is now one scale darker.
+	- Body background color of Viking Theme is now one scale darker.
+
+* 0.5.5
+
+	- Default chat tab can be now set to either General or Local chat on the advanced settings.
+	- General chat prompt will now default to last sent command at all time.
+	- Fixes a minor issue with Notifications.
+	- Fixes a minor issue with TextFloater.
+
+* 0.5.4
+
+	- Implements a macro for navigation points.
+	- Implements a hard coded loot filter as an option. When enabled, Jita will attempt to filter out loot messages to Omnibits, items of Superb quality or above, in game currency equal or superior to one platinum, buy, sell and repair notices.
+	- Propagate relevant messages to text floater. Relevant messages are those of System, Say and Emotes below 32 meters range, Whispers, Account whispers, messages containing character's name and keywords. TextFloater messages are set to be visible for 5.2 seconds and will not be overlapped for the duration.
+	- Minor UI tweaks.
+
+* 0.5.3
+
+	- Compacts chat members and messages data structures.
+	- Removes circular references to core.
+	- Adds a new chunk of validations to prevent shit from randomly failing.
+	- Max char members reduced to 64 from 128.
+	- Max chat lines reduced to 128 from 256.
+	- Max notifications reduced to 32 from 64.
+	- No longer shows current player chat range.
+	- No longer shows current zone on zone chat tab.
+
+* 0.5.2
+
+	- Bumps sec to yellow.
+	- Chat input will now remember last chat command sent. Selecting a chat tab will reset the prompt to the default value.
+	- Fixes an issue where latent servers messages may cause notifications to fail. 
+
+* 0.4.9
+
+	- "Custom" chat tab has been renamed "General".
+	- Command messages (often used for to communicate chat actions/errors) are now pushed to selected chat tabs and shown in notifications.
+	- Loot and Debug chat tabs will no longer auto-open on new messages and should be invoked manually instead.
+	- Whispers and account whispers now show the recipient as display name in General chat tab.
+	- Account friends names color are set to 'ChatPlayerName' in chat panes regardless of faction.
+	- Players channels and Circles chat tabs are now sorted by name.
+	- Fixes an issue with aggregated channels selector.
+	- Fixes an issue where faction logo might be shown above players models.
+	- Fixes minor issues with UI.
+
+* 0.4.8
+
+	- Resizing and moving chat windows will no longer trigger loading animation.
+	- Fixes an issue where clicking on an account friend name may not invoke the profile window.
+
+* 0.4.7
+
+	- Accommodates new changes related to coss-faction. Who API now works for both factions however there's no way of telling whose side a human belongs to. Profile may show "Unsure" in that case.
+	- Fixes an issue where account friend names may not be be shown correctly in chat roster.
+
+* 0.4.5
+
+	- Guild's "Message of the Day" will no longer open Guild chat tab.
+	- Guild and Guild Officer has been separated into their own respective chat tabs.
+	- Zone Chat and Zone PvP has been separated into their own respective chat tabs.
+	- Debug and Loot channels have their own respective chat tabs and both come closed and ignored by default.
+	- Fixes an issue where sender's name was not properly set on chat transcript.
+	- Fixes an issue where chest item was not properly set on character's model.
+
+* 0.4.4
+
+	- Character's name mentions are now auto-highlighted.
+	- Notifications for character's name mentions and keywords now includes the complete message.
+	- Fixes an issue where client kept pushing update notices for alt characters.
+	- Fixes an issue where profile window attempts to generate character preview for nearby users.
+	- Minor UI tweaks.
+
+* 0.4.3
+
+	- Implements an option enabling players to share their character exact location(zone, sub-zone and residence's name if any). Option can be toggled via Advanced Settings, and when disabled, other instances will fall-back to Who API.
+	- Implements last viewed messages. Can be also toggled via Advanced Settings.
+	- Loading external Libs is now deferred.
+	- Reduces rates at which extra packets were sent on ICNode keep-alive.
+	- Fixes an issue where player's costume might be nil.
+
+* 0.4.1
+
+	- Fixes an unhanded exception where zone pointer becomes nil during teleportation.
+	- Adds a button to profile windows to refresh characters info.
+
+* 0.4.0
+
+	- Client now displays a greetings notice when newer version is detected.
+	- Fixes an issue where current player was missing from Local stream roster.
+	- Fixes an issue where close chat range alert was not computing its correct delay. 
+	- Biography field in Advanced Settings no longer claim focus.
+	- Deferred core functions are now fired at 15 instead of 5.
+	- Profiles validation now occurs every 30 instead of 15.
+
+* 0.3.8
+
+	- Removes unwanted debugging output.
+
+* 0.3.7
+
+	- Revisit ICNode keep-alive request.
+	- Channels manager now will list previous players (custom) channels under Other Known Channels.
+	- Suggested menu will no longer emit sounds when typing.
+	- Max chat range increased to 512 from 256. 
+
+* 0.3.6
+
+	- Implements a channels manager where players can quickly leave or join new channels.
+	- Suggested menu now supports at (@) symbol for quick members mentions.
+	- Limits suggested menu to 64 items cap to lower memory consumption.
+	- Guild and circles tabs will no long auto-open for online status.
+	- Left clicking Quests links now will open Quests Log.
+	- Shift+Click on quests and items links will append them to chat input.
+
+* 0.3.5
+
+	- Players members lists will only be requested when streams aren't closed or ignored, also its rate is reduced for inactive channels.
+	- Implements a slash command to hard reset the add-on settings.
+	- Implements a suggested menu for slash commands and emotes, Jita commands and macros.
+
+* 0.3.4
+
+	- Gemnicolor now include default channels colors in preset palette.
+	- RosterLeftClickInfo, MessageDetectURLs and AutoExpandChatInput settings are now taken into account.
+	- Debug chat channel messages are now picks up by client.
+	- Fixes an issue where aggregated channels selector keeps appending children.
+
+* 0.3.3
+
+	- Fixes an issue with incoming whispers not registering properly. 
+	- Implements a first iteration of custom channels coloring.
+	- Increments IIComm channel.
+	- Roleplay highlighting is now disabled by default.
+	- Chat bubbles are now disabled by default.
+
+* 0.3.2
+
+	- Client now Supports chat reply key binding.
+	- Streamlined default emotes coloring.
+	- Streamlined debug helpers across different components.
+	- Current player profile will no longer be requested on new installs.
+
+* 0.3.1
+
+	- Queering player's location is now deferred as it was causing noticeable delays.
+	- Implements a couple of new macros.
+	- Minor tweaks to UI.
+
+* 0.3.0
+
+	- Client now implements a number of basic commands.
+	- First run greetings moved into help window.
+	- Revisit chat input prompt.
+	- Revisit chat tabs.
+	- Zoning and changing residences should be advertised in Zone tab.
+	- Bunch of minor tweaks.
+
+* 0.2.6
+
+	- Client now support a large number of built-in macros.
+	- Client now support chat-bubbles. Can be toggled off on Advanced Settings.
+	- Right clicking on chat tab will now clone it on a new window.
+	- Chat windows now should be pinned properly in ghost mode when restoring session.
+	- Chat input font now should restore properly .
+
+* 0.2.5
+
+	- Bunch of minor fixed for new and regressed issues.
+
+* 0.2.4
+
+	- Revisit text highlighting.
+	- Revisit chat input auto-expansion.
+	- Throttled icnode frames will now rewind once.
+	- Integrate with Katia Plots.
+
+* 0.2.3
+
+	- Channel display name can be set to abbreviations on Advanced settings.
+	- Chat tabs can be set toggle auto-hide in Ghost mode on Advanced settings.
+	- Joining and leaving chat channels should be now reflected more consistently by UI.
+
+* 0.2.2
+
+	- Fixed an issue with Custom tab was not remembering some channels because server would send reset their unique id - which defeats the bloody purpose of an unique id.
+	- Channels names are set to abbreviation is Custom tab except for players channels and circles.
+
+* 0.2.1
+
+	- Custom tab has been made into default and Players custom channels tabs will only open when manually invoked.
+	- Current player profile is now stored in scope as it was subject to race condition.
+	- Notifications should now pick up relevant party notices.
+	- Players roster in Party stream is now supported.
+	- Players roster shows packed info when hovering a member name.
+	- Integrated "This Is Me" biographies into players profiles.
+	- Moving and managing a fine bunch of internals.
+
+* 0.1.5
+
+	- Introduced a new option to toggle default behavior of chat input.
+	- Omnibits loot messages should now show the amount dropped, total gained, and how much left to cap.
+	- Slash commands now supports arguments.
+	- Fixed presence, keywords and mentions notifications.
+	- Overlay now should show new messages counts properly.
+	- Maximum players profiles has been increased to 256 from 128.
+	- Fixed few more lua code complaints thanks to a new Zod reminder.
+
+* 0.1.4
+
+	- Fixed an issue where members of whispers streams would be randomly shown on others.
+	- Fixed filleting messages by range on Local chat.
+	- Messages range should show correctly in Local messages when enabled.
+	- Update rate for entering in chat range alerts has been made to scale down in populated areas.
+
+	- Message Display is now set to Inline by default.
+	- Emotes and Animated emotes text color changed into something less obnoxious-y.
+	- Custom window background should be now compatible with ghost mode.
+
+	- OnAccountSupportTicketResult, ChatTellFailed and ChatAccountTellFailed are now hooked and result will be posted to command channel when they occur. 
+
+* 0.1.2
+
+	- Introduced "Custom" stream where players are able to filter a list of aggregated channels.
+	- Junk stream was replaced by a Custom tab aggregating all channels except for Combat because screw that shit.
+	- Link item to chat now should be reliable.
+	- Fixed and decreased max chat lines to display by default on a window to 124 from 255.
+	- The key "Enter" now should set the input in focus as default behaviour.
+	- New ChatLog events hooks such as loot, harvest and crate notifications has been ported into Client.
+	- Increased ICNode keep-alive interval to 300 from 240.
+
+* 0.1.1
+
+	- Fixed lua code complaints thanks to Zod reminder.
+	- Roster toggle status now will be restored on login.
+	- Increased ICNode keep-alive interval to 240 from 180.
+
+* 0.1.0
+
+	Initial thing.
