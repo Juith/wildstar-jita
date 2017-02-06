@@ -177,7 +177,7 @@ function Jita:new(o)
 		IIComm_KeepAlive               = true,
 
 		EnableDebugWindow              = false, -- Note: turning this thing on may add up to 1.2ms/frame and 5kb mem.
-		EnableIICommDebug              = false,
+		EnableIICommDebug              = true,
 	}
 
 	o.Factory = {} -- where "classes" are defined
@@ -398,6 +398,10 @@ function Jita:RestoreUserSettings()
 		self.UserSettings,
 		self.SaveData.Character.UserSettings
 	)
+
+	for _, __ in pairs(self.UserSettings.ChatWindow_MessageTextColors) do
+		self.Consts.ChatMessagesColors[_] = ApolloColor.new(__)
+	end
 end
 
 function Jita:OnSlashCommand(command, args)
