@@ -63,14 +63,8 @@ function ChatWindow:GenerateRoster()
 
 	elseif not stream.CanRequestMembersList then
 		self.MainForm:FindChild("RosterIcoLocked"):Show(true)
-
-		if stream.Type == 1 then
-			self.MainForm:FindChild("RosterIcoLocked"):SetTooltip("Players roster is disabled on General chat tab.")
-
-		elseif stream.Type == 2 then
-			self.MainForm:FindChild("RosterIcoLocked"):SetTooltip("Jita doesn't have permission to retrieve"
-				.. " the players list for this stream. Roster will be generated based on activity instead.")
-		end
+		self.MainForm:FindChild("RosterIcoLocked"):SetTooltip("Jita doesn't have permission to retrieve"
+			.. " the players list for this stream. Roster will be generated based on activity instead.")
 
 	elseif #stream.Members == 0 then
 		self.MainForm:FindChild("RosterIcoLoading"):Show(true)

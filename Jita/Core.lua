@@ -87,9 +87,14 @@ function Jita:new(o)
 	self.__index = self 
 
 	o.UserSettings = { -- User settings are mutable
-		DefaultStream                         = "Default::Local",
+		DefaultStream                         = "Default::General",
 		WindowsTheme                          = "Viking",
 		AutoHideChatLogWindows                = false,
+
+		JitaCustomChannel                     = "Jita",
+		AutojoinJitaCustomChannel             = true,
+
+		--
 
 		ChatWindow_ShowHeader                 = false,
 		ChatWindow_GhostMode                  = false,
@@ -97,14 +102,11 @@ function Jita:new(o)
 		ChatWindow_ShowRoster                 = true,
 		ChatWindow_AutoExpandChatInput        = true,
 		ChatWindow_RosterLeftClickInfo        = true,
-		ChatWindow_OpacityActive              = 0.96,  -- deprecated as of 0.5.8
-		ChatWindow_OpacityInactive            = 0.69,  -- deprecated as of 0.5.8
 		ChatWindow_Opacity                    = 0.69,
 		ChatWindow_ChatInputAutoSetFocus      = false,
 
 		ChatWindow_MessageDisplay             = "Inline",   -- "Block" or "Inline"
 		ChatWindow_MessageTextFont            = "CRB_Interface10",
-		ChatWindow_MessageTextColor           = "Inherit",  -- deprecated as of 0.3.3
 		ChatWindow_MessageTextColors          = {},
 		ChatWindow_MessageHighlightRolePlay   = false,
 		ChatWindow_MessageDetectURLs          = true,
@@ -147,8 +149,8 @@ function Jita:new(o)
 
 	o.CoreSettings = { -- thou probably shalt not change these.
 		ChatWindow_MaxChatMembers      = 64,  -- max items to render
-		ChatWindow_MaxChatLines        = 128, -- cause some users be like
-		ChatWindow_SayEmoteRange       = 512, -- hee sliders! lemme push them to cap.
+		ChatWindow_MaxChatLines        = 128, --
+		ChatWindow_SayEmoteRange       = 512, --
 
 		WindowManager_MaxClonesWindows = 32,
 
@@ -156,7 +158,7 @@ function Jita:new(o)
 		Stream_Segregated_MaxMembers   = 64,  -- max members to keep in memory per stream. (server may send up to 50 members cap per channel.)
 
 		Stream_Aggregated_MaxMessages  = 128, -- aggregated get lower memory space because of flood-gates effect.
-		Stream_Aggregated_MaxMembers   = 1,   -- limited only to current player, cause, again, aggregated streams are flood-y.
+		Stream_Aggregated_MaxMembers   = 32,  -- cause, again, aggregated streams are flood-y.
 
 		Client_MaxNotifications        = 32,
 		Client_MaxLocalPlayers         = 32,
@@ -175,7 +177,7 @@ function Jita:new(o)
 		IIComm_KeepAlive               = true,
 
 		EnableDebugWindow              = false, -- Note: turning this thing on may add up to 1.2ms/frame and 5kb mem.
-		EnableIICommDebug              = true,
+		EnableIICommDebug              = false,
 	}
 
 	o.Factory = {} -- where "classes" are defined
@@ -251,6 +253,7 @@ function Jita:OnPlayerUnitLoaded()
 
 	self.Client:SetConsoleVariables()
 	self.Client:SuppressChatLog()
+	self.Client:JoinJitaCustomChannel()
 	self.Client:SyncPlayerStreams()
 	self.Client:RestoreSavedState()
 
@@ -395,28 +398,6 @@ function Jita:RestoreUserSettings()
 		self.UserSettings,
 		self.SaveData.Character.UserSettings
 	)
-
-	for _, __ in pairs(self.UserSettings.ChatWindow_MessageTextColors) do
-		self.Consts.ChatMessagesColors[_] = ApolloColor.new(__)
-	end
-
-	if self.UserSettings.ChatWindow_MaxChatLines
-	> self.CoreSettings.ChatWindow_MaxChatLines then
-		self.UserSettings.ChatWindow_MaxChatLines = 
-			self.CoreSettings.ChatWindow_MaxChatLines
-	end
-
-	if self.UserSettings.ChatWindow_MaxChatMembers
-	> self.CoreSettings.ChatWindow_MaxChatMembers then
-		self.UserSettings.ChatWindow_MaxChatMembers = 
-			self.CoreSettings.ChatWindow_MaxChatMembers
-	end
-
-	if self.UserSettings.ChatWindow_SayEmoteRange 
-	> self.CoreSettings.ChatWindow_SayEmoteRange then
-		self.UserSettings.ChatWindow_SayEmoteRange =
-			self.CoreSettings.ChatWindow_SayEmoteRange
-	end
 end
 
 function Jita:OnSlashCommand(command, args)

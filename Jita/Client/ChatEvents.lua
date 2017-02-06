@@ -366,9 +366,7 @@ function Client:OnChatMessage(channel, message)
 				end
 			end
 
-			-- We only add chat members to segregated streams
-			if stream.Type == self.EnumStreamsTypes.SEGREGATED
-			and senderName ~= Apollo.GetString("GuildInfo_MessageOfTheDay") -- this on Carbino.
+			if senderName ~= Apollo.GetString("GuildInfo_MessageOfTheDay") -- this on Carbino.
 			then
 				if channelType
 				== ChatSystemLib.ChatChannel_AccountWhisper then

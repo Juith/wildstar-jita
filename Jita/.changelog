@@ -1,6 +1,11 @@
 * 0.6.0
 
-	- 
+	- /w and /aw now invoke suggested menu.
+	- Members of aggregated streams are now shown on roster.
+	- Clicking on URLs will now pop up a window for easy copying to clipboard.
+	- Profile bios are now highlighted.
+	- General is now the default chat tab.
+	- Users will now auto join a custom channel which will be used for inter add-on communication in future.
 
 * 0.5.9
 

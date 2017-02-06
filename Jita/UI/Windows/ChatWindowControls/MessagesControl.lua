@@ -853,19 +853,22 @@ end
 
 function ChatWindow:OnMLChatlineNodeClick(wndHandler, wndControl, strNode, tAttributes, eMouseButton)
 	if strNode == "URL" 
-	and eMouseButton == GameLib.CodeEnumInputMouse.Right
 	and tAttributes.URL
 	then
 		if not Jita.UserSettings.ChatWindow_MessageDetectURLs then
 			return
 		end
- 
-		local tSelectedText = self.ChatInputEditBox:GetSel()
 
-		-- Todo:
-		-- fire a context menu to copy urls to clipboard instead
-		self.ChatInputEditBox:InsertText(tAttributes.URL)
-		self.ChatInputEditBox:SetFocus()
+ 		self:OnCopyCloseButton()
+
+		self.CopyWindow = Apollo.LoadForm(Jita.XmlDoc, "JCC_CopyWindow", nil, self) 
+
+		if self.CopyWindow then
+			self.CopyWindow:FindChild("ContentEditBox"):SetText(tAttributes.URL)
+			self.CopyWindow:FindChild("ContentEditBox"):SetFocus()
+			
+			self.CopyWindow:Show(true, true)
+		end
 
 	elseif strNode == "Source" 
 	and eMouseButton == GameLib.CodeEnumInputMouse.Left
@@ -970,6 +973,13 @@ function ChatWindow:OnMLChatlineNodeClick(wndHandler, wndControl, strNode, tAttr
 	end
 
 	return false
+end
+
+function ChatWindow:OnCopyCloseButton(wndHandler, wndControl)
+	if self.CopyWindow and self.CopyWindow:IsValid() then
+		self.CopyWindow:Close()
+		self.CopyWindow:Destroy()
+	end
 end
 
 function ChatWindow:OnCloseItemTooltipForm(wndHandler, wndControl)

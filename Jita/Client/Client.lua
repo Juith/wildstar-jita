@@ -232,3 +232,28 @@ function Client:RestoreSavedState()
 		Jita.Player:RestoreProfile(profiles.Current)
 	end
 end
+
+function Client:JoinJitaCustomChannel()
+	if not Jita.UserSettings.AutojoinJitaCustomChannel == true
+	or not Jita.UserSettings.JitaCustomChannel
+	then
+		return
+	end
+
+	local channels = ChatSystemLib.GetChannels()
+	local member = false
+	
+	for _, item in ipairs(channels) do
+		if item:GetType()  == ChatSystemLib.ChatChannel_Custom
+		and item:GetName() == Jita.UserSettings.JitaCustomChannel
+		then
+			member = true
+		end
+	end
+
+	if not member then 
+		ChatSystemLib.JoinChannel(Jita.UserSettings.JitaCustomChannel)
+
+		Jita.UserSettings.AutojoinJitaCustomChannel = false
+	end
+end
