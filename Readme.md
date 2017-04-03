@@ -2,7 +2,7 @@
 
 **It's important to note that Jita is on rolling beta and there might be bugs and that it favors features over costs.** It's also worth noting that Jita will not disable Carbine's ChatLog upon installation. That choice is left to the player.
 
-###Getting started
+### Getting started
 
 Jita comes with somewhat of a wall of text as a first run greetings message to help users navigate its interface. This section is to briefly describe the most relevant part of the UI.
 
@@ -18,18 +18,18 @@ By default, five main tabs are open:
 
 To filter the list of aggregated channels on General, select the tab first then on Quick options.
 
-###Shortcuts:  
+### Shortcuts:  
 
 - **Left click** on a tab button to select a chat, **Wheel click** to quickly close a tab and **Right click** to clone a chat on a new window.
 - **Enter** to set chat input in focus. **Shift+Enter** when sending a message will attempt to keep it in focus.
 
-###Screenshots:  
+### Screenshots:  
 
 ![screenshot 01](https://raw.githubusercontent.com/Juith/wildstar-jita/master/screenshot01.png)
 
 ![screenshot 01](https://raw.githubusercontent.com/Juith/wildstar-jita/master/screenshot02.png)
 
-###Credits
+### Credits
 
 - ChatLog, SuggestedMenu and Social: Wildstar built-in add-ons by Carbine
 - ForgottenChat: Wildstar add-on by ForgottenLord
