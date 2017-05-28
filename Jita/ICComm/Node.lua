@@ -524,7 +524,7 @@ function Node:KeepAlive()
 
 	-- extra info are sent on low rate (based on random chances for now)
 
-	local rand = Utils:Random(1, 4)
+	local rand = Utils:Random(1, 2)
 
 	if rand == ICCOMM_KEEP_ALIVE_TYPE_SUMMARY
 	and Jita.UserSettings.IIComm_ShareInfo
@@ -539,23 +539,21 @@ function Node:KeepAlive()
 
 		if profile.Bio then
 			table.insert(extra, profile.Bio:len())
+		else
+			table.insert(extra, 0)
 		end
 
 		if Jita.UserSettings.IIComm_ShareInterests
 		and profile.Interests 
 		and profile.Interests > 0 
 		then
-			if not profile.Bio then
-				table.insert(extra, 0)
-			end
-
 			table.insert(extra, profile.Interests)
 		end
 
 		table.insert(data, ICCOMM_KEEP_ALIVE_TYPE_SUMMARY)
 		table.insert(data, extra)
 	else
-		rand = Utils:Random(1, 8)
+		rand = Utils:Random(1, 4)
 
 		if rand == ICCOMM_KEEP_ALIVE_TYPE_CHANNELS
 		and Jita.UserSettings.IIComm_SharePlayersChannels

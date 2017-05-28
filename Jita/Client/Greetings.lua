@@ -25,7 +25,7 @@ function Client:PushBetaGreetings()
 	stream:AddMessage({
 		Type    = "aml",
 		Content =  {
-		"<T Font=\"CRB_Header10_O\">Jita <T TextColor=\"FFEFEF00\">0." .. math.floor(Jita:GetAddonVersion()) .. "</T> &lt; Beta</T>",
+		"<T Font=\"CRB_Header10_O\">Jita <T TextColor=\"FF8EFF68\">0." .. math.floor(Jita:GetAddonVersion()) .. "</T> &lt; Beta</T>",
 		"Type <T TextColor=\"ChatSupport\">!help</T> to display help window, <T TextColor=\"ChatSupport\">!commands</T> to list available Jita commands and <T TextColor=\"ChatSupport\">!macros</T> for a detailed list of macros.",
 	}})
 end

@@ -43,10 +43,11 @@ function Client:OnWhoResponse(arResponse, eWhoResult, strResponse)
 		for _, unit in pairs(tWhoPlayers) do
 			name = unit.strName or ""
 
-			local title    = unit.strName  or ""
-			local level    = unit.nLevel   or 0
-			local class    = unit.eClassId or 0
-			local race     = unit.eRaceId  or 0
+			local title    = unit.strName    or ""
+			local level    = unit.nLevel     or 0
+			local class    = unit.eClassId   or 0
+			local race     = unit.eRaceId    or 0
+			local faction  = unit.eFactionId or 0
 			local path     = Consts.ktStringToPath[unit.strPath] or 0
 			local gender   = 0
 			local location = unit.strZone or ""
@@ -65,6 +66,7 @@ function Client:OnWhoResponse(arResponse, eWhoResult, strResponse)
 				Level    = level,
 				Class    = class,
 				Race     = race,
+				Faction  = faction,
 				Path     = path,
 				Gender   = "",
 				Location = location

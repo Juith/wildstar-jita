@@ -633,13 +633,13 @@ function Client:OnChatList(channel)
 		return
 	end
 
-	local slang
+	local crc32 = false
+	local slang = false
 
-	-- Keepme:
-	-- if Jita.LibCRC32 and channelName then
-		-- local crc = Jita.LibCRC32.Hash(string.lower(channelName))
-		-- slang = Consts.ChatChannelsSlangs[crc]
-	-- end
+	if Jita.LibCRC32 and channelName then
+		crc32 = Jita.LibCRC32.Hash(string.lower(channelName))
+		slang = Consts.ChatChannelsSlangs[crc]
+	end
 
 	stream.Members = {}
 

@@ -216,12 +216,6 @@ function ChatWindow:OnConfirmYesButton(wndHandler, wndControl)
 		self.ConfirmForm:Destroy()
 	end
 
-	local stream = Jita.Client:GetStream()
-
-	if not stream then
-		return
-	end
-
 	Jita.Client:DoChatAction(data.StreamName, data.MemberName, data.Action)
 end
 

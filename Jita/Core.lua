@@ -74,7 +74,7 @@ require "AccountItemLib"
 
 local Jita = {}
 
-local ADDON_VERSION    = 5.9                -- Major being 0 for if it _ever_ hit 1, it'd be time for me to move on.
+local ADDON_VERSION    = 6.3                -- Major being 0 for if it _ever_ hit 1, it'd be time for me to move on.
 local ADDON_NAME       = 'Jita Chat Client' -- I couldn't come with a better name.
 local WINDOW_NAMESPACE = 'JCC_'             -- prefix used to identify top windows in stratum.
 local ICCOMM_VERSION   = 1                  -- not that I'm planning to peruse working on new versions any time soon.
@@ -163,6 +163,7 @@ function Jita:new(o)
 		Client_MaxNotifications        = 32,
 		Client_MaxLocalPlayers         = 32,
 		Client_MaxProfiles             = 256, -- we only keep a bunch on a queue at any time, and they will be created then populated as needed replacing oldest.
+		Client_MaxPlayersOfInterest    = 8,
 
 		PingChatLogDelay               = 2,
 		PingChatLogInterval            = 15,
@@ -177,7 +178,7 @@ function Jita:new(o)
 		IIComm_KeepAlive               = true,
 
 		EnableDebugWindow              = false, -- Note: turning this thing on may add up to 1.2ms/frame and 5kb mem.
-		EnableIICommDebug              = true,
+		EnableIICommDebug              = false,
 	}
 
 	o.Factory = {} -- where "classes" are defined
@@ -391,6 +392,10 @@ function Jita:RestoreUserSettings()
 	or not self.SaveData.Character
 	or not self.SaveData.Character.UserSettings
 	then
+		if Apollo.GetAddon('ForgeUI') then
+			self.UserSettings.WindowsTheme = "ForgeDark"
+		end
+
 		return
 	end
 

@@ -37,10 +37,12 @@ function Client:CheckForNotifications(senderName, message)
 		hasMention = self:CheckMessageForPlayerMentions(message)
 	end
 
-	if (hasKeyword or hasMention)
-	and Jita.UserSettings.ChatWindow_MessageKeywordPlaySound == true
-	then
-		self:PlaySound(self.EnumSounds.Click)
+	if hasKeyword or hasMention then
+		self:AddPlayerOfInterest(senderName)
+		
+		if Jita.UserSettings.ChatWindow_MessageKeywordPlaySound == true then
+			self:PlaySound(self.EnumSounds.Keyword)
+		end
 	end
 
 	return hasKeyword, hasMention
@@ -66,6 +68,8 @@ function Client:CheckMessageForCommands(message)
 		}
 
 		self:AddNotification(notification)
+		
+		return true
 	end
 end
 
@@ -108,6 +112,8 @@ function Client:CheckMessageForPresence(message)
 		}
 
 		self:AddNotification(notification)
+		
+		return true
 	end
 end
 
@@ -153,6 +159,8 @@ function Client:CheckMessageForKeyworks(message)
 		}
 
 		self:AddNotification(notification)
+
+		return true
 	end
 end
 
@@ -200,6 +208,8 @@ function Client:CheckMessageForPlayerMentions(message)
 		}
 
 		self:AddNotification(notification)
+		
+		return true
 	end
 end
 

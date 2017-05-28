@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Addon Author="Jeuith" APIVersion="14" Name="Jita" Description="Jita Chat Client"> 
+<Addon Author="Jeuith" APIVersion="15" Name="Jita" Description="Jita Chat Client"> 
 	<Script Name="Core.lua"/> 
 
 	<Script Name="Models/Player.lua"/>

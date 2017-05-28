@@ -1,3 +1,21 @@
+* 0.6.3
+
+	- Fixes an issue with custom channels moderation: Pass ownership, un/set moderator, un/mute and kick player are now working properly.
+	- After Carbine had fixed Who response, correct human faction will now show up in player's profile.
+	- Fixes sound notifications for mentions and keywords found in chat.
+	- Improves ooc segments highlighting.
+	- Adds players of interest.
+
+* 0.6.2
+
+	- On a second thought, channel slang were crappy idea.
+	- Minor tweaks to UI
+
+* 0.6.1
+
+	- Right clicking on an item should bring a context menu and pops up a preview window if preview-able object
+	- Adds channel slang
+
 * 0.6.0
 
 	- /w and /aw now invoke suggested menu.

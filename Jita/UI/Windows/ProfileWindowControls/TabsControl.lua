@@ -17,26 +17,30 @@ function ProfileWindow:GenerateBioTabs(idSelectedTab)
 	local profile = Jita.Client:GetPlayerProfile(self.Metadata.Name)
 
 	if profile then
-		local crNotes = nil
+		local tabColor = nil
+
 		if Jita.Client.PrivateNotes[self.Metadata.Name] then
-			crNotes = 'ChatNexus'
+			tabColor = 'ChatNexus'
 		end
-		self:GenerateBioTabButton("NOTES", "  Notes", "Private Notes", tabsContainer, 69, (idSelectedTab == "NOTES"), crNotes)
+		
+		self:GenerateBioTabButton("NOTES", "  Notes", "Private Notes", tabsContainer, 69, (idSelectedTab == "NOTES"), tabColor)
 
 		if profile.ExternalBios then
+			tabColor = 'ChatNexus'
+
 			if profile.ExternalBios.TIM then
-				self:GenerateBioTabButton("TIM" , "  TIM", "This Is Me Biography", tabsContainer, 56, (idSelectedTab == "TIM"))
+				self:GenerateBioTabButton("TIM" , "  TIM", "This Is Me Biography", tabsContainer, 56, (idSelectedTab == "TIM"), tabColor)
 			end
 
 			if profile.ExternalBios.KRP then
-				self:GenerateBioTabButton("KRP" , "  KRP", "Katia Plot RP Finder", tabsContainer, 56, (idSelectedTab == "KRP"))
+				self:GenerateBioTabButton("KRP" , "  KRP", "Katia Plot RP Finder", tabsContainer, 56, (idSelectedTab == "KRP"), tabColor)
 			end
 		end
 
 		if Jita.CoreSettings.EnableDebugWindow
 		or Jita.CoreSettings.EnableIICommDebug
 		then
-			self:GenerateBioTabButton("DATA", "  Data", "Profile Data", tabsContainer, 58, (idSelectedTab == "DATA"))
+			self:GenerateBioTabButton("DEBUG", "  Debug", "Profile Data", tabsContainer, 72, (idSelectedTab == "DEBUG"))
 		end
 	end
 
@@ -118,7 +122,7 @@ function ProfileWindow:OnBioTabClick(wndHandler, wndControl, eMouseButton)
 		self.MainForm:FindChild("ExtendEditBoxPane"):Show(true)
 		self.MainForm:FindChild("ExtendEditBoxPane"):FindChild("EditBox"):SetText(text)
 
-	elseif idTab == "DATA" then
+	elseif idTab == "DEBUG" then
 		self.MainForm:FindChild("ExtendProfileContainer"):Show(true)
 
 		local text = 'Awaiting LibJSON..'

@@ -48,7 +48,9 @@ Consts.ChatChannelsSlangs =
 	[ChatSystemLib.ChatChannel_Party]   = "ChatCircle2",
 	[ChatSystemLib.ChatChannel_Society] = "ChatCircle2",
 	[ChatSystemLib.ChatChannel_Guild]   = "ChatGuild",
-	[4013610982]                        = "xkcdBarbiePink",
+	[1950815839]                        = "xkcdAcidGreen",  -- ws
+	[33474419]                          = "xkcdAcidGreen",  -- lf
+	[4013610982]                        = "xkcdBarbiePink", -- dn
 }
 
 Consts.ChatChannelsAbbreviations =

@@ -36,6 +36,7 @@ function Profile:new(o)
 	o.InfoUpdated     = false
 	o.ModelUpdated    = false
 	o.BioUpdated      = false
+
 	o.JitaUser        = false
 
 	return o

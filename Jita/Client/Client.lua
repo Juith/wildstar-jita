@@ -20,14 +20,15 @@ function Client:new(o)
 		SEGREGATED = 2, -- another. I hate to deal with exceptions.
 	}
 
-	o.Streams          = {} -- streams are groups of chat channels, and they encapsulate their metadata, channels, messages and members
-	o.Channels         = {} -- list of known chat channels
-	o.MembersProfiles  = {} -- a member can have only one profile across all channels/streams
-	o.PrivateNotes     = {} -- private notes on players are stored realm wide
-	o.LocalPlayers     = {} -- they come and go, thus we keep them on a separate scope
-	o.PartyPlayers     = {} -- they kind of important, we also keep them on a separate scope
-	o.Notifications    = {}
-	o.LastWhisper      = {}
+	o.Streams           = {} -- streams are groups of chat channels, and they encapsulate their metadata, channels, messages and members
+	o.Channels          = {} -- list of known chat channels
+	o.MembersProfiles   = {} -- a member can have only one profile across all channels/streams
+	o.PrivateNotes      = {} -- private notes on players are stored realm wide
+	o.LocalPlayers      = {} -- they come and go, thus we keep them on a separate scope
+	o.PartyPlayers      = {} -- they kind of important, we also keep them on a separate scope
+	o.PlayersOfInterest = {} -- a cache of players with notes, had mentioned a keyword, etc.
+	o.Notifications     = {}
+	o.LastWhisper       = {}
 
 	return o
 end

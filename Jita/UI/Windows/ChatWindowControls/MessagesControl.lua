@@ -189,9 +189,14 @@ function ChatWindow:GenerateChatMessageGeneric(message)
 
 	local channelType    = channel:GetType()
 	local channelName    = channel:GetName()
+	local channelCrc32   = 0
 	local channelCommand = channel:GetCommand()
 	local channelAbbr    = channel:GetAbbreviation()
 	local content        = message.Content
+
+	if Jita.LibCRC32 and channelName then
+		channelCrc32 = Jita.LibCRC32.Hash(string.lower(channelName))
+	end
 
 	channelAbbr = Consts.ChatChannelsAbbreviations[channelType] or channelAbbr
 
@@ -228,6 +233,17 @@ function ChatWindow:GenerateChatMessageGeneric(message)
 		source.strCrossFaction  = "false" 
 	end
 
+	local playerOfInterest = false
+
+	if not content.bSelf 
+	and strDisplayName
+	and strDisplayName:len() > 0
+	and channelType ~= ChatSystemLib.ChatChannel_Emote 
+	and channelType ~= ChatSystemLib.ChatChannel_AnimatedEmote
+	then
+		playerOfInterest = Jita.Client:IsPlayerOfInterest(strDisplayName)
+	end
+
 	--
 
 	xmlLine:AddLine("", crChannel, self.MessageTextFont, "Left")
@@ -262,6 +278,11 @@ function ChatWindow:GenerateChatMessageGeneric(message)
 		if content.bGM then
 			xmlPlayerName:AppendText(" ")
 			xmlPlayerName:AppendImage(Consts.kstrGMIcon, 20, 19)
+		end
+
+		if playerOfInterest then
+			xmlPlayerName:AppendText(" ")
+			xmlPlayerName:AppendImage("IconSprites:Icon_Mission_Scientist_ScanMineral", 8, 8)
 		end
 	end
 
@@ -349,6 +370,10 @@ function ChatWindow:GenerateChatMessageGeneric(message)
 					end
 				else
 					xmlLine:AppendText(strDisplayName, crPlayerName, self.MessageTextFont, source, "Source")
+				end
+
+				if playerOfInterest then
+					xmlLine:AppendImage("IconSprites:Icon_Mission_Scientist_ScanMineral", 5, 5)
 				end
 
 				xmlLine:AppendText(strPresenceState .. Apollo.GetString("Chat_ColonBreak"), crChannel, self.MessageTextFont, "Left")
@@ -641,7 +666,17 @@ function ChatWindow:HighlightChatMessageContent(strText, channelType)
 		end
 
 		index = 1
-		for ooc in strText:gmatch("%(%(.*%)%)") do
+		for ooc in strText:gmatch("(%b())") do
+			first, last = strText:find(ooc, index, true)
+			
+			if first and last then
+				oocs[first] = last
+				index = last + 1
+			end
+		end
+
+		index = 1
+		for ooc in strText:gmatch("(%b[])") do
 			first, last = strText:find(ooc, index, true)
 			
 			if first and last then
@@ -910,6 +945,10 @@ function ChatWindow:OnMLChatlineNodeClick(wndHandler, wndControl, strNode, tAttr
 	end
 
 	if strNode == "Link" then
+		-- Right clicking on a item open item preview if installed
+		if eMouseButton == GameLib.CodeEnumInputMouse.Right then
+			self:HookItemPreview(wndHandler, wndControl, strNode, tAttributes, eMouseButton)
+		end
 
 		-- note, tAttributes.nLinkIndex is a string value, instead of the int we passed in because it was saved
 		-- out as xml text then read back in.
@@ -922,7 +961,7 @@ function ChatWindow:OnMLChatlineNodeClick(wndHandler, wndControl, strNode, tAttr
 		or self.Links[nIndex].tNavPoint)
 		then
 			if Apollo.IsShiftKeyDown() then
-				self:AppendLinkToInput(self.ChatInputEditBox, self.Links[nIndex])
+				self:AppendLinkToInput(self.ChatInputEditBox, self.Links[nIndex]) 
 			else
 				if self.Links[nIndex].uItem then
 
@@ -1002,4 +1041,26 @@ function ChatWindow:HelperSaveLink(tLink)
 	self.NextLinkIndex = self.NextLinkIndex + 1
 
 	return self.NextLinkIndex - 1
+end
+
+function ChatWindow:HookItemPreview(wndHandler, wndControl, strNode, tAttributes, eMouseButton)
+-- Hookception
+
+	if strNode ~= "Link" then
+		return
+	end
+
+	local nIndex = tonumber(tAttributes.strIndex)
+
+	if not self.Links[nIndex].uItem then
+		return
+	end
+
+	if self.Links[nIndex].uItem:GetHousingDecorInfoId() ~= nil and self.Links[nIndex].uItem:GetHousingDecorInfoId() ~= 0 then
+		Event_FireGenericEvent("DecorPreviewOpen", self.Links[nIndex].uItem:GetHousingDecorInfoId())
+		return
+	else
+		Event_FireGenericEvent("ShowItemInDressingRoom", self.Links[nIndex].uItem)
+		return
+	end
 end

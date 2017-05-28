@@ -1,10 +1,12 @@
 local Jita = Apollo.GetAddon("Jita")
 local Client = Jita:Extend("Client")
 
+local Utils = Jita.Utils
+
 -- 
 
 function Client:AddPlayerProfile(name, base)
-	if not name or name == "" then
+	if not name or name:len() == 0 then
 		return
 	end
 
@@ -42,7 +44,7 @@ function Client:AddPlayerProfile(name, base)
 end
 
 function Client:GetPlayerProfile(name)
-	if not name or name == "" then
+	if not name or name:len() == 0 then
 		return
 	end
 
@@ -75,4 +77,79 @@ function Client:ValidatePlayersProfiles()
 			table.remove(self.MembersProfiles, pos)
 		end
 	end
+end
+
+function Client:AddPlayerOfInterest(name)
+	if not name or name:len() == 0 then
+		return
+	end
+
+	self:RemovePlayerOfInterest(name)
+
+	if Utils:Count(self.PlayersOfInterest) > Jita.CoreSettings.Client_MaxPlayersOfInterest then
+		table.remove(self.PlayersOfInterest, 1)
+	end
+
+	table.insert(self.PlayersOfInterest, name) 
+end
+
+function Client:RemovePlayerOfInterest(name)
+	if not name or name:len() == 0 then
+		return
+	end
+
+	for _, __ in pairs(self.PlayersOfInterest) do
+		if __ == name then
+			table.remove(self.PlayersOfInterest, _) 
+		end
+	end
+end
+
+function Client:IsPlayerOfInterest(name)
+	if not name or name:len() == 0 then
+		return false
+	end
+
+	local ofInterest = false
+
+	for _, __ in pairs(self.PlayersOfInterest) do
+		if __ == name then
+			ofInterest = true
+		end
+	end
+
+	-- Cut it short
+	if ofInterest then
+		return true
+	end
+
+	-- Check in notes
+	local hasNotes = self.PrivateNotes[name] or false
+
+	if hasNotes then
+		ofInterest = true
+	end
+	
+	-- Check profiles
+	local profile = self:GetPlayerProfile(name)
+
+	if profile then
+		if profile.IsOfInterest == true then
+			ofInterest = true
+		end
+
+		if profile.ExternalBios 
+		or (profile.Bio and profile.Bio:len() > 0)
+		then
+			ofInterest = true
+		end
+	end
+
+	--
+
+	if ofInterest then
+		self:AddPlayerOfInterest(name)
+	end
+
+	return ofInterest
 end

@@ -88,9 +88,6 @@ function ChatWindow:GenerateRoster()
 end
 
 function ChatWindow:GenerateRosterMemberButton(member, friendList, accountFriends, groupMembers)
-end
-
-function ChatWindow:GenerateRosterMemberButton(member, friendList, accountFriends, groupMembers)
 	if not member then
 		return
 	end
